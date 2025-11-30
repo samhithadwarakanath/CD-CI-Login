@@ -7,10 +7,15 @@
 </script>
 
 <div class="home">
-  <h1>🐾 Cat Facts Dashboard</h1>
-  <p>Log in with Google to explore and manage cat facts!</p>
-  <button class="login-btn" onclick={login}>Sign in with Google</button>
+    <h1>Welcome</h1>
+
+    <p>Log in with Google to explore and manage cat facts!</p>
+
+    <div data-testid="cat-list">
+        <!-- placeholder for cat facts list -->
+    </div>
 </div>
+
 
 <style>
   .home {

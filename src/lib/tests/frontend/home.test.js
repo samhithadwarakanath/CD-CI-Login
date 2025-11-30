@@ -1,11 +1,13 @@
 import { render, screen } from '@testing-library/svelte';
-import { test, expect } from 'vitest';
-import Home from '../../components/pages/HomePage.svelte';
+import HomePage from '../../components/pages/HomePage.svelte';
 
-test('home page renders correctly', () => {
-	render(Home);
+test('Home page renders heading', () => {
+  render(HomePage);
+  expect(screen.getByText(/welcome/i)).toBeTruthy();
+});
 
-	// Match your real HomePage text (from earlier DOM output)
-	expect(screen.getByText(/Cat Facts Dashboard/i)).toBeInTheDocument();
-	expect(screen.getByRole('button', { name: /sign in with google/i })).toBeInTheDocument();
+test('Home page lists cat facts section', () => {
+  render(HomePage);
+  const list = screen.getByTestId('cat-list');
+  expect(list).toBeTruthy();
 });

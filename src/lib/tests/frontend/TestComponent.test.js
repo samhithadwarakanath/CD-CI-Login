@@ -1,9 +1,11 @@
-import { render } from '@testing-library/svelte';
-import { test, expect } from 'vitest';
+import { render, screen } from '@testing-library/svelte';
 import TestComponent from '../../components/TestComponent.svelte';
 
 test('TestComponent renders without crashing', () => {
-	const { container } = render(TestComponent);
-	// Just verify something rendered
-	expect(container.innerHTML).not.toBe('');
+  render(TestComponent);
+});
+
+test('TestComponent renders correct text', () => {
+  render(TestComponent);
+  expect(screen.getByText(/test component/i)).toBeInTheDocument();
 });

@@ -1,5 +1,5 @@
 <script lang="js">
-  let name = "World";
+	const name = 'Test Component';
 </script>
 
-<p>Hello {name}!</p>
+<p> {name}!</p>

@@ -1,11 +1,34 @@
-import { render, screen } from '@testing-library/svelte';
-import { test, expect } from 'vitest';
-import Login from '../../components/pages/LoginPage.svelte';
+import { render, screen, fireEvent } from '@testing-library/svelte';
+import LoginPage from '../../components/pages/LoginPage.svelte';
+
 
 test('renders login page', () => {
-	render(Login);
+  render(LoginPage);
+  expect(screen.getAllByText(/login/i).length).toBeGreaterThan(0);
+});
 
-	expect(screen.getByText(/login/i)).toBeInTheDocument();
-	expect(screen.getByText(/welcome/i)).toBeInTheDocument();
-	expect(screen.getByRole('button', { name: /sign in with google/i })).toBeInTheDocument();
+
+test('Login page shows Google button', () => {
+  render(LoginPage);
+  expect(screen.getByText(/login with google/i)).toBeTruthy();
+});
+
+test('Login page has email input', () => {
+  render(LoginPage);
+  expect(screen.getByPlaceholderText(/email/i)).toBeTruthy();
+});
+
+test('Login button disabled without input', () => {
+  render(LoginPage);
+  const btn = screen.getByRole('button');
+  expect(btn.disabled).toBe(true);
+});
+
+test('Shows error message if invalid email typed', async () => {
+  render(LoginPage);
+
+  const input = screen.getByPlaceholderText(/email/i);
+  await fireEvent.input(input, { target: { value: 'invalid' } });
+
+  expect(screen.getByText(/invalid email/i)).toBeTruthy();
 });
